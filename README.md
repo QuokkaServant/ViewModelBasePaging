@@ -1,1 +1,1 @@
-# ViewModel based paging window
+# WPF ViewModel based paging window
