@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 using CommunityToolkit.Mvvm.Input;
 
@@ -37,6 +36,25 @@ namespace ViewModelBasePaging.ViewModels
                 case Key.Home:
                     ReturnHomePage();
                     break;
+                case Key.End:
+                    CurrentPageSource.NavigatePageCommand?.Execute(ViewModelLocator.Instance.EndPageViewModel);
+                    break;
+                case Key.OemPlus:
+                    {
+                        if (CurrentPageSource is not ActionPageViewModel actionPage)
+                            break;
+
+                        actionPage.OperationCountCommand?.Execute(ActionPageViewModel.Operation.Increment);
+                    }
+                    break;
+                case Key.OemMinus:
+                    {
+                        if (CurrentPageSource is not ActionPageViewModel actionPage)
+                            break;
+
+                        actionPage.OperationCountCommand?.Execute(ActionPageViewModel.Operation.Decrement);
+                    }
+                    break;
                 default:
                     break;
             }
@@ -44,7 +62,7 @@ namespace ViewModelBasePaging.ViewModels
 
         private void ReturnHomePage()
         {
-            CurrentPageSource = ViewModelLocator.Instance.HomePageViewModel;
+            CurrentPageSource.NavigatePageCommand?.Execute(ViewModelLocator.Instance.HomePageViewModel);
         }
     }
 }

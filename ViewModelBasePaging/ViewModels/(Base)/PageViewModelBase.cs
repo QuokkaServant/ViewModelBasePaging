@@ -12,6 +12,8 @@ namespace ViewModelBasePaging.ViewModels
 
         public ICommand LoadedCommand { private init; get; }
 
+        public ICommand UnloadedCommand { private init; get; }
+
         public ICommand NavigatePageCommand { private init; get; }
 
         public ICommand HomePageCommand { private init; get; }
@@ -19,6 +21,7 @@ namespace ViewModelBasePaging.ViewModels
         protected PageViewModelBase()
         {
             LoadedCommand = new RelayCommand<object?>(OnLoaded);
+            UnloadedCommand = new RelayCommand(OnUnloaded);
             NavigatePageCommand = new RelayCommand<PageViewModelBase>(NavigatePage);
             HomePageCommand = new RelayCommand(NavigateHomePage);
         }
@@ -29,13 +32,21 @@ namespace ViewModelBasePaging.ViewModels
         /// <param name="parameter">Add it if necessary.</param>
         protected virtual void OnLoaded(object? parameter)
         {
-            Debug.WriteLine($"Loaded {this} page.");
+            Debug.WriteLine($"Loaded {this} page. {parameter}");
         }
 
         /// <summary>
-        /// 
+        /// <see cref="FrameworkElement.Unloaded"/> command.
         /// </summary>
-        /// <param name="pageViewModel"></param>
+        protected virtual void OnUnloaded()
+        {
+            Debug.WriteLine($"Unloaded {this} page.");
+        }
+
+        /// <summary>
+        /// Go to the page that corresponds to <paramref name="pageViewModel"/>.
+        /// </summary>
+        /// <param name="pageViewModel"><see cref="PageViewModelBase"/> that you want to move around. If <see langword="null"/>, go to the <see cref="HomePageViewModel"/>.</param>
         protected virtual void NavigatePage(PageViewModelBase? pageViewModel)
         {
             MainWindowViewModel.CurrentPageSource = pageViewModel ?? ViewModelLocator.Instance.HomePageViewModel;

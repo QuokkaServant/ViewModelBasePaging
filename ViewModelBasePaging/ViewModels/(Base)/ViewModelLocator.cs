@@ -24,12 +24,18 @@ namespace ViewModelBasePaging.ViewModels
 
         public EndPageViewModel EndPageViewModel => GetRequiredService<EndPageViewModel>();
 
+        public ActionPageViewModel ActionPageViewModel => GetRequiredService<ActionPageViewModel>();
+
         private ViewModelLocator()
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<MainWindowViewModel>();
             serviceCollection.AddSingleton<HomePageViewModel>();
             serviceCollection.AddSingleton<EndPageViewModel>();
+
+            serviceCollection.AddSingleton<ActionPageViewModel>();
+
+            // TODO : Add to the collection when you add a page.
 
             serviceProvider = serviceCollection.BuildServiceProvider();
         }

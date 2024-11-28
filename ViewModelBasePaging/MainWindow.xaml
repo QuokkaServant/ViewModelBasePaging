@@ -21,6 +21,12 @@
         <DataTemplate DataType="{x:Type viewmodel:EndPageViewModel}">
             <view:EndPage />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:ActionPageViewModel}">
+            <view:ActionPage />
+        </DataTemplate>
+        
+        <!--TODO : Add to the collection when you add a page.-->
     </Window.Resources>
 
     <i:Interaction.Triggers>

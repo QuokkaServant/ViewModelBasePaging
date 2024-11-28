@@ -6,17 +6,27 @@
       xmlns:local="clr-namespace:ViewModelBasePaging.Views"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:viewmodel="clr-namespace:ViewModelBasePaging.ViewModels" 
-      mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+      mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage">
+    <Page.DataContext>
+        <Binding Source="{x:Static viewmodel:ViewModelLocator.Instance}" Path="HomePageViewModel" />
+    </Page.DataContext>
+    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{x:Null}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UnloadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
     <Grid>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="HOME" />
-        
-        <Button Margin="12" Padding="12,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Go to end page" 
-                Command="{Binding NavigatePageCommand}" CommandParameter="{Binding Source={x:Static viewmodel:ViewModelLocator.Instance}, Path=EndPageViewModel}"  />
+
+        <StackPanel Margin="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Margin="12,0" Padding="12,6" Content="Go to action page" Command="{Binding NavigatePageCommand}" CommandParameter="{Binding Source={x:Static viewmodel:ViewModelLocator.Instance}, Path=ActionPageViewModel}"  />
+            <Button Padding="12,6" Content="Go to directly end page" Command="{Binding NavigatePageCommand}" CommandParameter="{Binding Source={x:Static viewmodel:ViewModelLocator.Instance}, Path=EndPageViewModel}"  />
+        </StackPanel>
     </Grid>
 </Page>
