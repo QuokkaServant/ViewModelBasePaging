@@ -31,7 +31,7 @@
 
         protected override void OnUnloaded()
         {
-            Count = null; // Initialize if necessary.
+            //Count = null; // Initialize if necessary.
             base.OnUnloaded();
         }
 
@@ -54,6 +54,11 @@
                 default:
                     break;
             }
+
+            if (Count >= 0)
+                return;
+
+            base.NavigateHomePage(); // Call base function.
         }
     }
 }

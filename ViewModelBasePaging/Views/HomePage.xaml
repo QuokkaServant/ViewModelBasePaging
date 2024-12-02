@@ -11,7 +11,8 @@
     <Page.DataContext>
         <Binding Source="{x:Static viewmodel:ViewModelLocator.Instance}" Path="HomePageViewModel" />
     </Page.DataContext>
-    
+
+    <!--Page-by-page interaction triggers definition is required for base class commands and association.-->
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{x:Null}" />

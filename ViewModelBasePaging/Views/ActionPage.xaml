@@ -31,7 +31,7 @@
             <Button Padding="12" Content="+" Command="{Binding OperationCountCommand}" CommandParameter="{x:Static viewmodel:ActionPageViewModel+Operation.Increment}" />
         </StackPanel>
 
-        <Button Margin="12" Padding="12,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Go to end page" 
-                Command="{Binding NavigatePageCommand}" CommandParameter="{Binding Source={x:Static viewmodel:ViewModelLocator.Instance}, Path=EndPageViewModel}"  />
+        <Button Margin="12" Padding="12,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Go to loading page" 
+                Command="{Binding NavigatePageCommand}" CommandParameter="{Binding Source={x:Static viewmodel:ViewModelLocator.Instance}, Path=LoadingPageViewModel}"  />
     </Grid>
 </Page>

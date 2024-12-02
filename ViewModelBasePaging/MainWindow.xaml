@@ -7,8 +7,9 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewmodel="clr-namespace:ViewModelBasePaging.ViewModels" 
         xmlns:view="clr-namespace:ViewModelBasePaging.Views"
+        xmlns:behavior="clr-namespace:ViewModelBasePaging.Behaviors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <Binding Source="{x:Static viewmodel:ViewModelLocator.Instance}" Path="MainWindowViewModel" />
     </Window.DataContext>
@@ -25,6 +26,10 @@
         <DataTemplate DataType="{x:Type viewmodel:ActionPageViewModel}">
             <view:ActionPage />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:LoadingPageViewModel}">
+            <view:LoadingPage />
+        </DataTemplate>
         
         <!--TODO : Add to the collection when you add a page.-->
     </Window.Resources>
@@ -36,7 +41,11 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        <Frame ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" NavigationUIVisibility="Automatic" Content="{Binding CurrentPageSource, Mode=TwoWay}" />
+        <Frame ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" NavigationUIVisibility="Automatic" Content="{Binding CurrentPageSource, Mode=TwoWay}">
+            <i:Interaction.Behaviors>
+                <behavior:NavigationFrameBehavior CurrentPageSource="{Binding CurrentPageSource}" />
+            </i:Interaction.Behaviors>
+        </Frame>
 
         <Button Margin="12" Padding="12,6" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Return to the home page" 
                 Visibility="{Binding IsCurrentHomePage, Converter={StaticResource TrueToVisibilityCollapsedConverter}}" 

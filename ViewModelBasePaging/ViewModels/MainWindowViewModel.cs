@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace ViewModelBasePaging.ViewModels
 {
+    using Operation = ActionPageViewModel.Operation;
+
     public sealed class MainWindowViewModel : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
     {
         public PageViewModelBase CurrentPageSource
@@ -41,10 +43,14 @@ namespace ViewModelBasePaging.ViewModels
                     break;
                 case Key.OemPlus:
                     {
-                        if (CurrentPageSource is not ActionPageViewModel actionPage)
-                            break;
-
-                        actionPage.OperationCountCommand?.Execute(ActionPageViewModel.Operation.Increment);
+                        switch (CurrentPageSource) // Differentiate the behavior according to the base page.
+                        {
+                            case ActionPageViewModel actionPage:
+                                actionPage.OperationCountCommand?.Execute(Operation.Increment);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     break;
                 case Key.OemMinus:
@@ -52,7 +58,7 @@ namespace ViewModelBasePaging.ViewModels
                         if (CurrentPageSource is not ActionPageViewModel actionPage)
                             break;
 
-                        actionPage.OperationCountCommand?.Execute(ActionPageViewModel.Operation.Decrement);
+                        actionPage.OperationCountCommand?.Execute(Operation.Decrement);
                     }
                     break;
                 default:

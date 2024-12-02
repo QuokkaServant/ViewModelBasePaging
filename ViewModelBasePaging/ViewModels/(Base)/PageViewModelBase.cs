@@ -26,6 +26,7 @@ namespace ViewModelBasePaging.ViewModels
             HomePageCommand = new RelayCommand(NavigateHomePage);
         }
 
+        #region [Method#] OnLoaded
         /// <summary>
         /// <see cref="FrameworkElement.Loaded"/> command.
         /// </summary>
@@ -34,7 +35,9 @@ namespace ViewModelBasePaging.ViewModels
         {
             Debug.WriteLine($"Loaded {this} page. {parameter}");
         }
+        #endregion
 
+        #region [Method#] OnUnloaded
         /// <summary>
         /// <see cref="FrameworkElement.Unloaded"/> command.
         /// </summary>
@@ -42,7 +45,9 @@ namespace ViewModelBasePaging.ViewModels
         {
             Debug.WriteLine($"Unloaded {this} page.");
         }
+        #endregion
 
+        #region [Method#] NavigatePage
         /// <summary>
         /// Go to the page that corresponds to <paramref name="pageViewModel"/>.
         /// </summary>
@@ -51,7 +56,9 @@ namespace ViewModelBasePaging.ViewModels
         {
             MainWindowViewModel.CurrentPageSource = pageViewModel ?? ViewModelLocator.Instance.HomePageViewModel;
         }
+        #endregion
 
+        #region [Method#] NavigateHomePage
         /// <summary>
         /// Return to the home page.
         /// </summary>
@@ -59,5 +66,6 @@ namespace ViewModelBasePaging.ViewModels
         {
             NavigatePage(ViewModelLocator.Instance.HomePageViewModel);
         }
+        #endregion
     }
 }

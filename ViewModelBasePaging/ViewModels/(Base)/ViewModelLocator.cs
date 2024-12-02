@@ -26,6 +26,8 @@ namespace ViewModelBasePaging.ViewModels
 
         public ActionPageViewModel ActionPageViewModel => GetRequiredService<ActionPageViewModel>();
 
+        public LoadingPageViewModel LoadingPageViewModel => GetRequiredService<LoadingPageViewModel>();
+
         private ViewModelLocator()
         {
             var serviceCollection = new ServiceCollection();
@@ -34,6 +36,7 @@ namespace ViewModelBasePaging.ViewModels
             serviceCollection.AddSingleton<EndPageViewModel>();
 
             serviceCollection.AddSingleton<ActionPageViewModel>();
+            serviceCollection.AddSingleton<LoadingPageViewModel>();
 
             // TODO : Add to the collection when you add a page.
 
